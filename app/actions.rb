@@ -8,6 +8,16 @@ get '/messages' do
   erb :'messages/index'
 end
 
+post '/messages' do
+  binding.pry
+  @message = Message.create(
+    title: params[:subject],
+    content: params[:content],
+    author: params[:author]
+  )
+  redirect '/messages'
+end
+
 get '/messages/new' do
   erb :'messages/new'
 end
