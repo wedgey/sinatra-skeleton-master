@@ -1,0 +1,34 @@
+<p>
+  Author: <%= @message.author %><br />
+  Created at: <%= @message.created_at %>
+</p>
+
+<p>
+  Link: <a href="<%= @message.url %>"><%= @message.url %></a>
+</p>
+
+<p>
+  <%= @message.content %>
+</p>
+
+<% messages = Message.where(author: @message.author).where("id <> ?", @message.id)
+  unless messages.empty? %>
+<hr />
+<h2>Other posts by <%= @message.author %></h2>
+<% end %>
+<% Message.where(author: @message.author).where("id <> ?", @message.id).each do |message| %>
+  <p>
+    <strong>Author: <%= message.author %></strong><br />
+    Created at: <%= message.created_at %>
+  </p>
+
+  <p>
+    Link: <a href="<%= @message.url %>"><%= message.url %></a>
+  </p>
+
+  <p>
+    <%= message.content %>
+  </p>
+<% end %>
+<hr />
+<a href="/messages">Back to all messages</a>

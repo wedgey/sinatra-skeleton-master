@@ -7,7 +7,7 @@ class Message < ActiveRecord::Base
 private
 
   def valid_url
-    unless url =~ /\bhttps?:\/\/?www\..+\.\w+\b/
+    unless url.empty? || url =~ /\bhttps?:\/\/?www\..+\.\w+\b/
       errors.add(:url, "should have a valid url")
     end
   end
